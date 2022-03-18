@@ -14,7 +14,7 @@
 	<parameter name="jenkinsPipelineEnvironments" value="DEMO"/>	
 	<parameter name="jenkinsJobExecutionMode" value="continue"/>
 
-	<parameter name="extensibleChoice::testrail_run_name::my" value="import static java.util.Calendar.*\ndef date = new Date().format('MM/dd/yyy')\nreturn ['Release_WEB_' + date]" />
+	<parameter name="extensibleChoice::testrail_run_name::my" value="import static java.util.Calendar.*;def date = new Date().format('MM/dd/yyy');return ['Release_WEB_' + date]" />
 
 	<test name="User API tests">
 		<classes>

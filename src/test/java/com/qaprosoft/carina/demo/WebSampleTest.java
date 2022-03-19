@@ -52,6 +52,7 @@ public class WebSampleTest implements IAbstractTest {
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
+        pause(60);
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         
         //Closing advertising if it's displayed
@@ -80,6 +81,7 @@ public class WebSampleTest implements IAbstractTest {
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
+        pause(60);
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         // Open model compare page
         FooterMenu footerMenu = homePage.getFooterMenu();
@@ -101,6 +103,7 @@ public class WebSampleTest implements IAbstractTest {
     public void testNewsSearch() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
+        pause(60);
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
         
         NewsPage newsPage = homePage.getFooterMenu().openNewsPage();

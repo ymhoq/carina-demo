@@ -13,7 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<carina-core_version>7.3.18</carina-core_version>
+		<carina-core_version>7.3.19.1659-SNAPSHOT</carina-core_version>
 		<java.version>11</java.version>
 		<zebrunner-agent.version>1.6.7</zebrunner-agent.version>
 		<suite>helloWorld</suite>
@@ -73,11 +73,6 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.3.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>5.3.19</version>
 		</dependency>
 	</dependencies>
 

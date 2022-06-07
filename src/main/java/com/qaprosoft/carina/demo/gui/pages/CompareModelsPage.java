@@ -18,7 +18,6 @@ package com.qaprosoft.carina.demo.gui.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -37,6 +36,9 @@ public class CompareModelsPage extends AbstractPage {
     @FindBy(className = "compare-candidates")
     private ExtendedWebElement compareMenu;
 
+    @FindBy(xpath = "//tr[.//a[text()='%s']]//td[@class='nfo'][%d]")
+    private ExtendedWebElement spec;
+    
     public CompareModelsPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(compareMenu);
@@ -54,9 +56,7 @@ public class CompareModelsPage extends AbstractPage {
             condidateBlock.sendKeysToInputField(models[index]);
             condidateBlock.getFirstPhone();
             for (ModelSpecs.SpecType type : ModelSpecs.SpecType.values()) {
-                ExtendedWebElement spec = findExtendedWebElement(By.xpath(
-                        String.format("//tr[.//a[text()='%s']]//td[@class='nfo'][%d]", type.getType(), index + 1)));
-                modelSpec.setToModelSpecsMap(type, spec.getText());
+                modelSpec.setToModelSpecsMap(type, spec.format(type.getType(), index + 1).getText());
             }
             modelSpecs.add(modelSpec);
         }

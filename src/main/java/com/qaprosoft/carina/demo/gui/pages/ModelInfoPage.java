@@ -21,6 +21,7 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
+
 public class ModelInfoPage extends AbstractPage {
     @FindBy(css = ".help-display strong")
     private ExtendedWebElement displayInfoLabel;

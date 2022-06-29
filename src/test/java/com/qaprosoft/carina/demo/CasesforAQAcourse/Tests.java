@@ -113,6 +113,7 @@ public class Tests implements IAbstractTest {
 
         DropDownMenu ddMenu = new DropDownMenu(getDriver());
         ddMenu.isPageOpened();
+
         ddMenu.dropMenuClick1();  // A to Z
 
         softAssert.assertTrue(pPage.readProductsByClassName("" +
@@ -122,7 +123,7 @@ public class Tests implements IAbstractTest {
         ddMenu.dropMenuClick2(); // Z to A
         softAssert.assertTrue(pPage.reverseList(pPage.readProductsByClassName("" +
                 "inventory_item_name")).stream().sorted().collect(Collectors.toUnmodifiableList()).equals(pPage.readProductsByClassName("" +
-                "inventory_item_name")), " Z to A is work incorrectly");
+                "inventory_item_name").stream().collect(Collectors.toUnmodifiableList())), " Z to A is work incorrectly");
 
         softAssert.assertAll();
     }

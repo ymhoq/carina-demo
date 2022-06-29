@@ -1,13 +1,17 @@
-package com.qaprosoft.carina.demo.CasesforAQAcourse;
+package com.qaprosoft.carina.demo.gui.pages.swaglabs;
 
-import com.qaprosoft.carina.core.foundation.api.ssl.NullHostnameVerifier;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.invoke.MethodHandles;
 
 public class ProductCard extends AbstractPage {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[1]/img")
     private ExtendedWebElement image;
 
@@ -24,12 +28,12 @@ public class ProductCard extends AbstractPage {
     private ExtendedWebElement ADDTOCARTbtn;
 
     public ProductCard(WebDriver driver) {
-        super(driver);
+        super(driver); setPageURL("/cart.html");
     }
 
-    public Boolean readImage() {
-        assertElementPresent(image);
-        return image.getElement().isDisplayed();
+    public Boolean isPresentCardImage() {
+        return image.isPresent();
+
     }
 
     public String readProductName() {
@@ -46,6 +50,7 @@ public class ProductCard extends AbstractPage {
         assertElementPresent(price);
         return price.getText();
     }
+
 
 
 }

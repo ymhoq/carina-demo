@@ -34,6 +34,8 @@ public class NewsPage extends AbstractPage {
     
     @FindBy(xpath="//div[@class='news-item']")
     private List<NewsItem> news;
+
+
     
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -44,6 +46,11 @@ public class NewsPage extends AbstractPage {
         searchTextField.type(q);
         searchButton.click();
         return news;
+    }
+
+    public ArticlePage openArticle(int index) {
+        news.get(index).getTitleLink().click();
+        return new ArticlePage(driver);
     }
     
 }

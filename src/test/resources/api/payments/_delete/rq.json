@@ -1,0 +1,8 @@
+[
+  {
+    "id": 55,
+    "dateOfReg": "${dateOfReg}",
+    "amount": "${amount}",
+    "driverId": "${driverId}"
+  }
+]

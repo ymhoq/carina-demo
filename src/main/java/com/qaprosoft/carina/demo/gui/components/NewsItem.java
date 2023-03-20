@@ -34,4 +34,8 @@ public class NewsItem extends AbstractUIObject {
     public String readTitle() {
         return titleLink.getElement().getText();
     }
+
+    public ExtendedWebElement getTitleLink() {
+        return titleLink;
+    }
 }

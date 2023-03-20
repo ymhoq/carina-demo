@@ -1,0 +1,10 @@
+
+  {
+    <#if id??>"id": "${id}",</#if>
+  <#if dateOfReg??>"dateOfReg": "${dateOfReg}",</#if>
+  <#if amount??>"amount": "${amount}",</#if>
+  <#if driverId??>"driverId": "${driverId}"</#if>
+}
+
+
+

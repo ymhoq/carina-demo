@@ -20,9 +20,9 @@ import java.util.Set;
 
 public class FirstSteps implements IAbstractTest {
 
-    private final String EMAIL = "email@gmail.com";
-    private final String USERNAME = "user1234user";
-    private final String PASSWORD = "pass1234";
+    private final String EMAIL = "emaidsadl1@gmail.com";
+    private final String USERNAME = "user11234user";
+    private final String PASSWORD = "pass11234";
 
 
 
@@ -38,14 +38,15 @@ public class FirstSteps implements IAbstractTest {
         HeaderMenu headerMenu = homePage.getHeaderMenu();
 
         SignUpPage signUpPage = headerMenu.openSignUpButtonPage();
-
+        signUpPage.scrollToPasswordField();
         Assert.assertTrue(signUpPage.isPageOpened(), "Sign Up Page Button Page is not opened ");
 
         signUpPage.setUserInfo(EMAIL, USERNAME, PASSWORD);
-        signUpPage.clickAgreeBtns();
+
         signUpPage.clickSubmitBtn();
 
-        Assert.assertTrue(signUpPage.isPageOpened(), "wasn't opened next page");
+        Assert.assertTrue(signUpPage.isSucsessfullRegistration(), "registration is fail: ");
+
 
     }
 

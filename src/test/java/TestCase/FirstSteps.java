@@ -3,20 +3,20 @@ package TestCase;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
+import com.qaprosoft.carina.demo.gui.SwitchPage;
 import com.qaprosoft.carina.demo.gui.components.FooterMenu;
 import com.qaprosoft.carina.demo.gui.components.HeaderMenu;
 import com.qaprosoft.carina.demo.gui.components.compare.HeaderMenuElements;
 import com.qaprosoft.carina.demo.gui.components.compare.LogInModal;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.LoginPage;
-import com.qaprosoft.carina.demo.gui.pages.RedirectedPage;
-import com.qaprosoft.carina.demo.gui.pages.SignUpPage;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
+
+import java.util.Set;
 
 public class FirstSteps implements IAbstractTest {
 
@@ -25,58 +25,7 @@ public class FirstSteps implements IAbstractTest {
     private final String PASSWORD = "pass1234";
 
 
-    @Test()
-    @MethodOwner(owner = "Andrii SA")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testFirstCase() {
 
-        HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-
-        homePage.scrollToFooterMenu();
-
-        FooterMenu footerMenu = homePage.getFooterMenu();
-        //Assert.assertTrue( footerMenu.isUIObjectPresent(), "Footer does not present");
-        //footerMenu.addLinksToFooter();
-        //footerMenu.openNewsPage();
-        footerMenu.openNewsPage();
-        //footerMenu.openLink(0);
-
-    }
-
-
-    @Test()
-    @MethodOwner(owner = "Andrii SA")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testSecondCase() {
-
-        HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        HeaderMenu headerMenu = homePage.getHeaderMenu();
-        Assert.assertTrue(headerMenu.isUIObjectPresent(1), "Header menu wasn't found!");
-
-        RedirectedPage redirectedPage = headerMenu.openInstagramButtonPage();
-        Assert.assertTrue(redirectedPage.isPageOpened(), "Instagram Button Page is not opened ");
-
-        redirectedPage = headerMenu.openEvButtonPage();
-        Assert.assertTrue(redirectedPage.isPageOpened(), "EvButton Page Button Page is not opened ");
-
-        Assert.assertTrue(redirectedPage.isPageOpened(), "YTubeButton Page Button Page is not opened ");
-
-        redirectedPage = headerMenu.openRssButtonPage();
-        Assert.assertTrue(redirectedPage.isPageOpened(), "Rss Button Page Button Page is not opened ");
-
-        LogInModal logInModal = headerMenu.openLoginButtonPage();
-        Assert.assertTrue(logInModal.isUIObjectPresent(), "Login Button Page Button Page is not opened ");
-
-        redirectedPage = headerMenu.openMerchButtonPage();
-        Assert.assertTrue(redirectedPage.isPageOpened(), "Merch Button Page Button Page is not opened ");
-
-        SignUpPage signUpPage = headerMenu.openSignUpButtonPage();
-        Assert.assertTrue(redirectedPage.isPageOpened(), "SignUP Button Page Button Page is not opened ");
-
-
-    }
 
     @Test()
     @MethodOwner(owner = "Andrii SA")
@@ -144,12 +93,58 @@ public class FirstSteps implements IAbstractTest {
         Assert.assertTrue(loginPage.isLoginFail(), "login is failed");
     }
 
+
     @Test()
     @MethodOwner(owner = "Andrii SA")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testFifthCase() {
+    public void testFooter() {
         HomePage homePage = new HomePage(getDriver());
-        homePage.scrollToFooterMenu();
+        homePage.open();
+        homePage.scrollToFooterMenus();
+        FooterMenu footerMenu = homePage.getFooterMenu();
+
+        Assert.assertTrue(footerMenu.isUIObjectPresent(),
+                "footer menu is not present");
+
+        InstagramPage instagramPage = footerMenu.openInstagtamPage();
+        SwitchPage.openPageByIndex(getDriver(), 1);
+        Assert.assertEquals(instagramPage.getCurrentUrl(),
+                "https://www.instagram.com/gsmarenateam/",
+                "instagram not opened");
+
+        SwitchPage.closeWindow(getDriver());
+        SwitchPage.openPageByIndex(getDriver(), 0);
+
+
+        TwitterPage twitterPage = footerMenu.openTwiterPage();
+        SwitchPage.openPageByIndex(getDriver(), 1);
+
+
+        Assert.assertEquals(twitterPage.getCurrentUrl(),
+                "https://twitter.com/gsmarena_com",
+                "twitter not opened");
+        SwitchPage.closeWindow(getDriver());
+        SwitchPage.openPageByIndex(getDriver(), 0);
+
+        FaceBookPage faceBookPage = footerMenu.openFBPage();
+        SwitchPage.openPageByIndex(getDriver(), 1);
+
+
+        Assert.assertEquals(faceBookPage.getCurrentUrl(),
+                "https://www.facebook.com/people/GSMArenacom/100066846038410/",
+                "facebook not opened");
+
+        SwitchPage.closeWindow(getDriver());
+        SwitchPage.openPageByIndex(getDriver(), 0);
+
+        YouTubePage youTubePage = (YouTubePage) footerMenu.openYTPage();
+        SwitchPage.openPageByIndex(getDriver(), 1);
+
+
+        Assert.assertEquals(youTubePage.getCurrentUrl(),
+                "https://www.youtube.com/channel/UCbLq9tsbo8peV22VxbDAfXA?sub_confirmation=1",
+                "youtube not opened");
+
+
     }
 
 

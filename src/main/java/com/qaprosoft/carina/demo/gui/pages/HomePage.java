@@ -40,7 +40,7 @@ import com.qaprosoft.carina.demo.gui.components.WeValuePrivacyAd;
 public class HomePage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "//div[@id = 'footer']//div[@id = 'footmenu']")
+    @FindBy(xpath = "//div[@id = 'footer']")
     private FooterMenu footerMenu;
 
     @FindBy(xpath = "//div[contains(@class, 'brandmenu-v2')]//a")
@@ -64,6 +64,7 @@ public class HomePage extends AbstractPage {
     }
 
     public FooterMenu getFooterMenu() {
+        scrollToFooterMenus();
         return footerMenu;
     }
 
@@ -89,8 +90,19 @@ public class HomePage extends AbstractPage {
                 elementFound = true;
             } else {
                 // Прокручиваем страницу на 500 пикселей вниз
-                jsExecutor.executeScript("window.scrollBy(0, 500)");
+                jsExecutor.executeScript("window.scrollBy(0, 2000)");
             }
+        }
+    }
+
+    public void scrollToFooterMenus() {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        while (footerMenuElement.isElementNotPresent(1)) {
+
+            //This will scroll the web page till end.
+            js.executeScript("window.scrollBy(0, 1000)");
         }
     }
 

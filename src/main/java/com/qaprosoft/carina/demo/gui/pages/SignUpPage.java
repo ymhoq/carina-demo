@@ -37,9 +37,10 @@ public class SignUpPage extends AbstractPage {
     }
 
     public SignUpPage typePasswordNameEdit(String text) {
-        //passwordField.type(text, 5);
+        passwordField.type(text, 5);
         passwordField.click();
-        passwordField.sendKeys(Keys.valueOf("text1234"), 5);
+
+       // passwordField.sendKeys(, 5);
         return new SignUpPage(driver);
     }
 

@@ -15,7 +15,9 @@
  */
 package com.qaprosoft.carina.demo.gui.components;
 
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.components.footer.FooterItem;
+import com.qaprosoft.carina.demo.gui.pages.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
@@ -24,9 +26,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,12 +36,23 @@ public class FooterMenu extends AbstractUIObject {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "./div[@class='footer-inner']//a[contains(text(),'Compare')]")
+    @FindBy(xpath = ".//a[contains(text(),'Compare')]")
     private ExtendedWebElement compareLink;
 
-    @FindBy(xpath = "./div[@id='footmenu']//a[text() = 'News']")
+    @FindBy(xpath = ".//a[text() = 'News']")
     private ExtendedWebElement newsLink;
 
+    @FindBy(xpath = ".//a[@class = 'yt-icon']")
+    private ExtendedWebElement youtubeLink;
+
+    @FindBy(xpath = ".//a[@class = 'fb-icon']")
+    private ExtendedWebElement facebookLink;
+
+    @FindBy(xpath = ".//a[@class = 'tw-icon']")
+    private ExtendedWebElement twitterLink;
+
+    @FindBy(xpath = ".//a[@class = 'ig-icon']")
+    private ExtendedWebElement instagramLink;
 
     public FooterMenu(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -59,17 +69,26 @@ public class FooterMenu extends AbstractUIObject {
         return new NewsPage(driver);
     }
 
-    public FooterMenu scrollToFooterMenu() {
-        //JavascriptExecutor js = (JavascriptExecutor) driver;
-        //   js.executeScript(Script,Arguments);
-        //
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        driver.get("http://https://www.gsmarena.com/");
-        driver.findElement(By.className("footer-inner"));
-
-       // compareLink.scrollTo();
-        return this;
+    public AbstractPage openYTPage() {
+        youtubeLink.click();
+        return new YouTubePage(driver);
     }
+
+    public FaceBookPage openFBPage() {
+        facebookLink.click();
+        return new FaceBookPage(driver);
+    }
+
+    public TwitterPage openTwiterPage() {
+        twitterLink.click();
+        return new TwitterPage(driver);
+    }
+
+    public InstagramPage openInstagtamPage() {
+        instagramLink.click();
+        return new InstagramPage(driver);
+    }
+
 
 
 

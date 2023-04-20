@@ -6,9 +6,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qaprosoft.carina.demo.gui.components.header.HeaderItem;
 import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,7 @@ import com.qaprosoft.carina.demo.gui.pages.RedirectedPage;
 import com.qaprosoft.carina.demo.gui.pages.SignUpPage;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import org.testng.Assert;
 
 public class HeaderMenu extends AbstractUIObject {
 
@@ -85,8 +90,11 @@ public class HeaderMenu extends AbstractUIObject {
     @FindBy(id = "login-popup2")
     private LogInModal logInModal;
 
-    @FindBy(xpath = "//header//ul[@id='menu']//a")
+    @FindBy(xpath = "//header//ul[@id='menu']")
     private List<ExtendedWebElement> headerButtons;
+
+    @FindBy(xpath = "//header//ul[@id='menu']//li")
+    private List<HeaderItem> headerItemLinks;
 
 
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
@@ -212,5 +220,78 @@ public class HeaderMenu extends AbstractUIObject {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void showTextInLinks() {
+        for (HeaderItem headerItem : headerItemLinks) {
+            LOGGER.info(headerItem.headerLink.getText());
+
+            Assert.assertEquals(1, 1, "");
+        }
+
+    }
+
+    public List<HeaderItem> getHeaderItemLinks() {
+        return headerItemLinks;
+    }
+
+
+    public static void hoverOnAllLinks() {
+
+
+    }
+
+    public void hoverOnLink(WebDriver driver) throws InterruptedException {
+
+// Locating the Main Menu (Parent element)
+        // WebElement mainMenu = driver.findElement(By.xpath("<Xpath of the Main menu"));
+
+//Instantiating Actions class
+       /* Actions actions = new Actions(driver);
+
+//Hovering on main menu
+        actions.moveToElement(this.loginButton.getElement());
+
+        actions.perform();
+        this.sleep(10);
+// Locating the element from Sub Menu
+        // WebElement subMenu = driver.findElement(By.xpath("<Xpath of the sub element>"));
+
+//To mouseover on sub menu
+        actions.moveToElement(yTubeButton.getElement());
+        driver.wait(100);
+        actions.pause(10);
+//build()- used to compile all the actions into a single step
+        actions.click().build().perform();*/
+
+    }
+
+    public void sleep(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+
+        }
+    }
+
+    synchronized public void I_hover_over_menu_item() {
+        //WebDriver driver = getDriver();
+        By by = By.xpath(".//*[@id='login-active']/i");
+        Actions actions = new Actions(driver);
+        WebElement elem = driver.findElement(by);
+        actions.moveToElement(elem);
+        this.sleep(100);
+        pause(10);
+        actions.perform();
+        pause(10);
+        this.sleep(100);
+    }
+
+
+    public Logger toLogger(String text) {
+
+        LOGGER.info(text);
+
+        return LOGGER;
     }
 }
